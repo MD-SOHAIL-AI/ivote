@@ -1,52 +1,42 @@
-🗳️ iVote – Intelligent Voting Login System
+iVote – Intelligent Voting Login System
 
 iVote is an intelligent face-recognition–based voting authentication system built using Python, OpenCV, face_recognition, and PyQt6.
-It enables secure and automatic voter login using facial biometrics, ensuring accuracy, anti-duplication, and real-time logging.
+It enables secure, automatic voter login using facial biometrics, ensuring accuracy, anti-duplication, and real-time vote logging.
 
-📌 Features
-🔹 1. Voter Registration
+Features
+1. Voter Registration
 
-Captures 10 unique face samples per voter
+Captures 10 unique face samples
 
-Prevents duplicate images using encoding similarity
+Automatically skips duplicate frames using encoding distance
 
-Enhances face quality (contrast + sharpness)
+Enhances images (contrast and sharpness) for better training
 
-Saves images automatically in dataset/
+Saves images in dataset/
 
-Stores voter info (ID + Name) in voter_names.json
+Stores voter details in voter_names.json
 
-🔹 2. Model Training
+2. Model Training
 
-Extracts 128-D face encodings using face_recognition
+Extracts 128-D face encodings
 
-Maps encodings to voter IDs and names
+Associates encodings with voter IDs and names
 
-Saves trained model as encodings.npz for fast loading
+Saves the trained model in encodings.npz
 
-🔹 3. Live Face Recognition
+3. Real-Time Face Recognition
 
-Detects and recognizes faces in real time
+Live camera-based recognition
 
-Compares live encodings with known voters
+Matches live encodings with stored encodings
 
-Logs:
+Logs timestamp, voter ID, voter name, and accuracy distance
 
-Timestamp
+Includes a cooldown mechanism to prevent repeat voting
 
-Voter ID
+4. PyQt6 GUI Interface
 
-Name
-
-Distance (accuracy)
-
-uses a cooldown system to prevent immediate re-voting repeating.
-
-🔹 4. PyQt6 Graphical Interface
-
-Dark mode UI
-
-Buttons for:
+Dark-themed, clean interface with buttons for:
 
 Select Camera
 
@@ -54,25 +44,25 @@ Register Voter
 
 Train Recognizer
 
-Run Recognition
+Live Recognition
 
 Show Registered Voters
 
 Exit
 
-Live output logs inside GUI
+Real-time log output is displayed inside the GUI window.
 
-📁 Project Structure
-iVote/
-│── dataset/                 # Registered face samples
+Project Structure
+ivote/
+│── dataset/                 # Captured face samples
 │── trainer/
-│     ├── voter_names.json   # All registered voter IDs + names
-│     ├── encodings.npz      # Saved trained model
-│     └── voters.csv         # Attendance and recognition log
-│── main.py                  # Main program
+│     ├── voter_names.json   # Registered voter details
+│     ├── encodings.npz      # Saved face encodings/model
+│     └── voters.csv         # Recognition log
+│── main.py                  # Main application code
 │── README.md                # Project documentation
 
-🔧 Technologies Used
+Technologies Used
 
 Python 3.x
 
@@ -82,18 +72,18 @@ face_recognition (dlib)
 
 NumPy
 
-Pillow (PIL)
+Pillow
 
 PyQt6
 
-CSV / JSON data storage
+CSV and JSON storage
 
-📦 Installation
-1️⃣ Clone the Repository
-git clone https://github.com/yourusername/iVote.git
-cd iVote
+Installation
+1. Clone the Repository
+git clone https://github.com/MD-SOHAIL-AI/ivote.git
+cd ivote
 
-2️⃣ Install Dependencies
+2. Install Dependencies
 pip install opencv-python
 pip install face_recognition
 pip install numpy
@@ -101,85 +91,71 @@ pip install pillow
 pip install PyQt6
 
 
-⚠ Note:
-face_recognition requires dlib, which may need CMake and Visual Studio Build Tools (on Windows).
+Note:
+face_recognition requires dlib, which may need CMake and Visual Studio Build Tools on Windows.
 
-▶️ Running the Application
+Running the Application
 
 Start the GUI:
 
 python main.py
 
-🛠 How the System Works
-1️⃣ Registration Process
+How the System Works
+1. Registration
 
-User enters Voter ID and Name
+User enters voter ID and name
 
-System captures 10 unique face images
+System captures 10 unique face samples
 
-Duplicate frames are skipped using encoding distance threshold
+Duplicate frames are automatically skipped
 
-Processed images saved in dataset/
+Images are saved and voter details updated
 
-2️⃣ Training Process
+2. Training
 
-All dataset images are scanned
+All images in dataset/ are processed
 
-Face encodings extracted
+Face encodings are extracted
 
-Encodings + IDs + names saved into encodings.npz
+Data is saved into encodings.npz
 
-3️⃣ Recognition Process
+3. Live Recognition
 
-Camera reads a live frame
+Detects live face from camera
 
-Frame is enhanced (CLAHE, resize)
+Enhances the frame using CLAHE
 
-Face encoding extracted
+Compares with stored encodings
 
-Matched with stored encodings
+On match, logs the vote and applies cooldown
 
-If matched:
+Attendance Log Format
 
-Display name
+voters.csv contains:
 
-Log vote into voters.csv
-
-Apply cooldown to prevent multiple votes
-
-📝 Attendance Log Format (voters.csv)
 timestamp_local	id	name	distance
-2025-12-02T14:30:21	101	Arjun	0.3321
-🛡 Security Notes
+Security Features
 
-Each voter can be recognized only once per cooldown window.
+Duplicate frame prevention
 
-Voter IDs are unique and stored securely.
+Cooldown to block repeated votes
 
-Face recognition thresholds are tuned for accuracy and anti-spoofing.
+Secure JSON and NPZ storage
 
-🎯 Use Cases
+Unique voter ID mapping
 
-College election systems
+Use Cases
 
-Smart attendance
+College or university election systems
 
-Secure identity verification
+Secure attendance marking
 
 Face-based login systems
 
-📌 Future Enhancements (Optional)
+Biometric identity verification
 
-Anti-spoofing (blink detection / depth scan)
+Author
 
-Cloud database integration
-
-Mobile app version
-
-Fingerprint + face multi-mode authentication
-
-👤 Author
-
-Your Name
-Intelligent Voting System Developer
-(Replace with your details)
+SOHAIL
+Developer – Intelligent Voting System
+GitHub: MD-SOHAIL-AI
